@@ -9,6 +9,10 @@ https://discord.gg/CGz259ZR
 <br>
 or friend on discord Valcan#1407 / irony#0572
 
+# Running The Code
+You type SOMETHING in the windows cmd. Then You press enter.
+Your code should run.
+
 # Introducing The Concept of Instruction Oriented Programming
 Instruction-oriented programming is a new programming concept which is a little bit similar to the historical significant programming concept, functional programming. The basic concept of instruction oriented programming is simple:
 Every keyword is an instruction
