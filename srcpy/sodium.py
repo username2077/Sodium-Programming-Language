@@ -10,16 +10,19 @@ DIGITS = {
 }
 
 # Keywords
-KW_PRINT = 'print'
-KW_VAR   = 'store'
-KW_DEF   = 'define'
-KW_IF    = 'if'
-KW_WHEN  = 'when'
-KW_END   = 'end'
+KW_PRINT   = 'print'
+KW_VAR     = 'store'
+KW_EXECUTE = 'execute'
+KW_DEF     = 'define'
+KW_IF      = 'if'
+KW_WHEN    = 'when'
+KW_END     = 'end'
+
 
 INSTRUCTIONS = {
     KW_PRINT,
     KW_VAR,
+    KW_EXECUTE,
     KW_DEF,
     KW_IF,
     KW_WHEN,
@@ -46,6 +49,7 @@ TT_IDENTIFYER  = 'IDENTIFYER'
 TT_SEPARATOR   = 'SEPARATOR'
 
 variables = {}
+functions = {}
 
 def typeof(string=''):
     if string == '': return None
@@ -179,75 +183,90 @@ def parse(tokens):
 
 current_line = 0
 
-current_code_level = 0
-executing_code_level = 0
+class Interpreter:
+    def __init__(self):
+        self.current_code_level = 0
+        self.executing_code_level = 0
+        self.in_function = False
+        self.func_name = ""
 
-def PRINT(object):
-    if '\\n' in object:
-        for i in object.split("\\n")[:-1]:
-            stdout.write(f'{i}\n')
-        return
-    stdout.write(f'{object}')
+    def PRINT(self, object):
+        if '\\n' in object:
+            for i in object.split("\\n")[:-1]:
+                stdout.write(f'{i}\n')
+            return
+        stdout.write(f'{object}')
 
-def DEFINE(name, connectors):
-    pass
+    def DEFINE(self, name, connectors):
+        pass
 
-def interpret(tokens, types):
-    if not types or types[0] != TT_INSTRUCTION:
-        return
+    def interpret(self, tokens, types):
+        if not types or types[0] != TT_INSTRUCTION:
+            return
+        if tokens[0] == KW_END:
+            if self.executing_code_level == self.current_code_level:
+                self.executing_code_level -= 1
+            self.current_code_level -= 1
+            return
 
-    global current_code_level, executing_code_level
-    if tokens[0] == KW_END:
-        if executing_code_level == current_code_level:
-            executing_code_level -= 1
+        if self.in_function:
+            functions[self.func_name].append(tokens)
+            functions[self.func_name].append(types)
 
-        current_code_level -= 1
-        return
+        if self.current_code_level != self.executing_code_level:
+            return
 
-    if current_code_level != executing_code_level:
-        return
+        if tokens[0] == KW_PRINT:
+            "print EXPR"
+            EXPR = str(evaluate(tokens[1:], types[1:]))
+            self.PRINT(EXPR)
+            return
 
-    if tokens[0] == KW_PRINT:
-        "print EXPR"
-        EXPR = str(evaluate(tokens[1:], types[1:]))
-        PRINT(EXPR)
-        return
+        if tokens[0] == KW_VAR:
+            "store EXPR VAR"
+            EXPR = tokens[1:len(tokens) - 1]
+            VAR = tokens[-1]
+            variables.update({VAR: evaluate(EXPR, types[1:len(tokens) - 1])})
+            return
 
-    if tokens[0] == KW_VAR:
-        "store EXPR VAR"
-        EXPR = tokens[1:len(tokens) - 1]
-        VAR = tokens[-1]
-        variables.update({VAR: evaluate(EXPR, types[1:len(tokens) - 1])})
-        return
+        if tokens[0] == KW_DEF:
+            "define NAME CONNECTORS"
+            self.current_code_level += 1
+            self.in_function = True
+            self.func_name = tokens[1]
+            functions.update({self.func_name : []})
 
-    if tokens[0] == KW_DEF:
-        "define NAME CONNECTORS"
+        if tokens[0] == KW_IF:
+            "if CONDI"
+            CONDI = evaluate(tokens[1:], types[1:])
+            self.current_code_level += 1
+            if CONDI == 'true':
+                self.executing_code_level += 1
+            return
+        if tokens[0] == KW_WHEN:
+            "when CONDI"
+            CONDI = evaluate(tokens[1:], types[1:])
+            self.current_code_level += 1
+            if CONDI == 'true':
+                self.executing_code_level += 1
+            return
 
-    if tokens[0] == KW_IF:
-        "if CONDI"
-        CONDI = evaluate(tokens[1:], types[1:])
-        current_code_level += 1
-        if CONDI == 'true':
-            executing_code_level += 1
-        return
-    if tokens[0] == KW_WHEN:
-        "when CONDI"
-        CONDI = evaluate(tokens[1:], types[1:])
-        current_code_level += 1
-        if CONDI == 'true':
-            executing_code_level += 1
-        return
 
 def main():
     global current_line
     text = read_file(file_name=argv[-1])
+
+    interp = Interpreter()
+
     for stmt in text:
         current_line += 1
         tokens = tokenize(stmt)
         try:
-            interpret(tokens=tokens, types=parse(tokens))
+            interp.interpret(tokens, parse(tokens))
         except Exception as e:
-            stdout.write(f"Exception in line {current_line}: {e}\n")
+            stdout.write(f"\nException in line {current_line}: {e}\n")
+
+    print(functions)
 
 if __name__ == '__main__':
     main()
