@@ -181,14 +181,28 @@ def parse(tokens):
 
     return types
 
+
+class Instruction:
+    def __init__(self, name, connectors=[], stmts=[]):
+        self.name = name
+        self.connectors = connectors
+        self.stmts = stmts
+
+    def __repr__(self):
+        return f'{self.name}'
+
+
 current_line = 0
 
 class Interpreter:
     def __init__(self):
-        self.current_code_level = 0
-        self.executing_code_level = 0
+        self.current_cl = 0
+        self.executing_cl = 0
+
         self.in_function = False
         self.func_name = ""
+        self.stmts_in_func = []
+        self.connectors = []
 
     def PRINT(self, object):
         if '\\n' in object:
@@ -201,20 +215,29 @@ class Interpreter:
         pass
 
     def interpret(self, tokens, types):
-        if not types or types[0] != TT_INSTRUCTION:
-            return
+        if not types or types[0] != TT_IDENTIFYER and types[0] != TT_INSTRUCTION: return
         if tokens[0] == KW_END:
-            if self.executing_code_level == self.current_code_level:
-                self.executing_code_level -= 1
-            self.current_code_level -= 1
+            if self.executing_cl == self.current_cl: self.executing_cl -= 1
+            self.current_cl -= 1
+
+            instruc = Instruction(self.func_name, self.connectors, self.stmts_in_func)
+            functions[self.func_name] = instruc
+            self.in_function = False
+            self.func_name = ''
+            self.connectors = []
             return
 
         if self.in_function:
-            functions[self.func_name].append(tokens)
-            functions[self.func_name].append(types)
+            self.stmts_in_func.append([tokens, types])
 
-        if self.current_code_level != self.executing_code_level:
+        if self.current_cl != self.executing_cl:
             return
+
+        if types[0] == TT_IDENTIFYER:
+            "INSTRUCTION ARGS"
+            inst = functions[tokens[0]]
+            for i in inst.stmts:
+                self.interpret(i[0], i[1])
 
         if tokens[0] == KW_PRINT:
             "print EXPR"
@@ -231,24 +254,19 @@ class Interpreter:
 
         if tokens[0] == KW_DEF:
             "define NAME CONNECTORS"
-            self.current_code_level += 1
+            self.current_cl += 1
             self.in_function = True
             self.func_name = tokens[1]
-            functions.update({self.func_name : []})
+            self.connectors = tokens[2:]
+            functions.update({self.func_name : None})
+            return
 
         if tokens[0] == KW_IF:
             "if CONDI"
             CONDI = evaluate(tokens[1:], types[1:])
-            self.current_code_level += 1
+            self.current_cl += 1
             if CONDI == 'true':
-                self.executing_code_level += 1
-            return
-        if tokens[0] == KW_WHEN:
-            "when CONDI"
-            CONDI = evaluate(tokens[1:], types[1:])
-            self.current_code_level += 1
-            if CONDI == 'true':
-                self.executing_code_level += 1
+                self.executing_cl += 1
             return
 
 
@@ -266,7 +284,6 @@ def main():
         except Exception as e:
             stdout.write(f"\nException in line {current_line}: {e}\n")
 
-    print(functions)
 
 if __name__ == '__main__':
     main()
