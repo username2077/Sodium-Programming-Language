@@ -17,9 +17,9 @@ Your code should run.
 Instruction-oriented programming is a new programming concept which is a little bit similar to the historical significant programming concept, functional programming. The basic concept of instruction oriented programming is simple:
 Every keyword is an instruction
 
-`print “Hello, World!”`
+`print "Hello, World!"`
 
-`store “Hello, World!” msg`
+`store "Hello, World!" msg`
 
 Defining a function is tantamount to appending a new keyword
 
