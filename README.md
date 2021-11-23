@@ -10,7 +10,7 @@ https://discord.gg/CGz259ZR
 or friend on discord Valcan#1407 / irony#0572
 
 # Running The Code
-You type SOMETHING in the windows cmd. Then You press enter.
+You type `python sodium.py file_name` in the windows cmd. Then You press enter.
 Your code should run.
 
 # Introducing The Concept of Instruction Oriented Programming
