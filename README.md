@@ -7,7 +7,7 @@ Sodium is a general purpose programming language which is instruction-oriented (
 <img src="https://cdn.icon-icons.com/icons2/2108/PNG/512/discord_icon_130958.png" width="200" height="200">
 https://discord.gg/CGz259ZR
 <br>
-or friend on discord Valcan#1407 / irony#0572
+or friend on discord Valcan#1407 (The assistant developer)
 
 # Introducing The Concept of Instruction Oriented Programming
 Instruction-oriented programming is a new programming concept which is a little bit similar to the historical significant programming concept, functional programming. The basic concept of instruction oriented programming is simple:
