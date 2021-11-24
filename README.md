@@ -1,13 +1,13 @@
-<img src="https://media.discordapp.net/attachments/896783689176977508/906387936319275018/explosion-14066.png">
+<img src="https://media.discordapp.net/attachments/896783689176977508/906387936319275018/explosion-14066.png" align="right" width=200 height=200>
 
-# Sodium-Programming-Language
+# Sodium Programming Language
 Sodium is a general purpose programming language which is instruction-oriented (a new programming concept that we are developing and devising)
 
 # Support / Contact
 <img src="https://cdn.icon-icons.com/icons2/2108/PNG/512/discord_icon_130958.png" width="200" height="200">
 https://discord.gg/CGz259ZR
 <br>
-or friend on discord Valcan#1407 / irony#0572
+or friend on discord Valcan#1407 (The assistant developer)
 
 # Running The Code (In Python)
 1. Open terminal 
@@ -31,12 +31,13 @@ Every keyword is an instruction
 
 Defining a function is tantamount to appending a new keyword
 
-```
-define myPrint msg
-    print "My print: " + msg
-end
-myPrint "Hello World!"
-```
+`define myPrint msg`
+<br>
+`print "My print: " + msg`
+<br>
+`end`
+<br>
+`myPrint "Hello World!"`
 
 Output:
 
