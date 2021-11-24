@@ -9,6 +9,18 @@ https://discord.gg/CGz259ZR
 <br>
 or friend on discord Valcan#1407 (The assistant developer)
 
+# Running The Code (In Python)
+1. Open terminal 
+2. You type `python sodium.py file_name`. 
+3. Then You press enter.
+4. Your code _should_ run. 
+
+# Running The Code (In C)
+1. Compile srcc/sodium.c
+2. 
+3.
+4.
+
 # Introducing The Concept of Instruction Oriented Programming
 Instruction-oriented programming is a new programming concept which is a little bit similar to the historical significant programming concept, functional programming. The basic concept of instruction oriented programming is simple:
 Every keyword is an instruction
