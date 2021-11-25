@@ -44,17 +44,17 @@ There are several advantages of an instruction-oriented programming language. Fi
 	As you can see, the syntax of an instruction oriented programming language is accessible and casual. The first token of a statement is always a keyword, and the tokens behind are the arguments of the keyword, yet we call them connectors because they serve as connectors or interfaces between programmers and the interpreter. The keywords in here are called instructions because they look like separate commands to a computer, that is the reason why this type of programming languages are named as instruction oriented programming languages. Compared to languages like C++ and Java, this type of language has advantages in readability.
 
 # Basis
-| Hello World
+> Hello World
 
 `print "Hello World!"`
 
-| Variable
+> Variable
 
 `store 3.1415926 pi`
 <br>
 `store "GPA 4.0" gpa`
 
-| Defining Instruction
+> Defining Instruction
 
 ```
 define Person name age gender
