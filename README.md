@@ -5,7 +5,6 @@ Sodium is a general purpose programming language which is instruction-oriented (
 
 # Support / Contact
 <img src="https://cdn.icon-icons.com/icons2/2108/PNG/512/discord_icon_130958.png" width="200" height="200">
-https://discord.gg/CGz259ZR
 <br>
 or friend on discord Valcan#1407 (The assistant developer)
 
