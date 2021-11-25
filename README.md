@@ -3,10 +3,10 @@
 # Sodium Programming Language
 Sodium is a general purpose programming language which is instruction-oriented (a new programming concept that we are developing and devising)
 
-# Support / Contact
+# Contact
 <img src="https://cdn.icon-icons.com/icons2/2108/PNG/512/discord_icon_130958.png" width="200" height="200">
 <br>
-or friend on discord Valcan#1407 (The assistant developer)
+Valcan#1407 (The assistant developer)
 
 # Running The Code
 ## In Python
