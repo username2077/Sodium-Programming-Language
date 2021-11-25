@@ -45,14 +45,17 @@ There are several advantages of an instruction-oriented programming language. Fi
 
 # Basis
 | Hello World
+
 `print "Hello World!"`
 
 | Variable
+
 `store 3.1415926 pi`
 <br>
 `store "GPA 4.0" gpa`
 
 | Defining Instruction
+
 ```
 define Person name age gender
     print name + "is a "
@@ -62,4 +65,5 @@ end
 ```
 
 Use an instruction:
+
 `Person "Satin Wuker" 13 "male"`
