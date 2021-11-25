@@ -22,19 +22,27 @@ We have not done the C version yet, sorry
 Instruction-oriented programming is a new programming concept which is a little bit similar to the historical significant programming concept, functional programming. The basic concept of instruction oriented programming is simple:
 Every keyword is an instruction
 
-`print "Hello, World!"`
+```python
+print "Hello, World!"
+```
 
-`store "Hello, World!" msg`
+```python
+store "Hello, World!" msg
+```
 
 Defining a function is tantamount to appending a new keyword
 
 `define myPrint msg`
 <br>
-`print "My print: " + msg`
+```python
+print "My print: " + msg
+```
 <br>
 `end`
 <br>
-`myPrint "Hello World!"`
+```python
+myPrint "Hello World!"
+```
 
 Output:
 
@@ -46,17 +54,23 @@ There are several advantages of an instruction-oriented programming language. Fi
 # Basis
 > Hello World
 
-`print "Hello World!"`
+```python 
+print "Hello World!"
+```
 
 > Variable
 
-`store 3.1415926 pi`
+```python
+store 3.1415926 pi
+```
 <br>
-`store "GPA 4.0" gpa`
+```python
+store "GPA 4.0" gpa
+```
 
 > Defining Instruction
 
-```
+```python
 define Person name age gender
     print name + "is a "
     print age
@@ -66,4 +80,6 @@ end
 
 Use an instruction:
 
-`Person "Satin Wuker" 13 "male"`
+```python
+Person "Satin Wuker" 13 "male"
+```
