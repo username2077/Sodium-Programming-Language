@@ -49,6 +49,7 @@ TT_IDENTIFYER  = 'IDENTIFYER'
 variables = {}
 instructions = {}
 
+# typeof: returns the type of a value
 def typeof(string=''):
     if string == '': return None
     if string[0] == '"' and string[-1] == '"':
@@ -60,7 +61,9 @@ def typeof(string=''):
     if string.count('.') <= 1:
         return 'number'
 
-
+##################################################################################################
+# Evaluate
+# Determines the priority of an operation
 def precedence(op):
     if op == '+' or op == '-':
         return 1
@@ -77,6 +80,7 @@ def applyOp(a, b, op):
         return 'true'
     return 'false'
 
+# Evaluate an expression
 def evaluate(tokens, types, temp_var={}):
     values = []
     ops = []
@@ -134,6 +138,7 @@ def read_file(file_name):
         content[-1] += '\n'
         return content
 
+# Separate a statement into lists of tokens
 def tokenize(stmt):
     current_tok = ''
     quote_count = 0
@@ -154,6 +159,7 @@ def tokenize(stmt):
 
     return tokens
 
+# Add tokens types
 def parse(tokens):
     types = []
     for i in tokens:
@@ -171,6 +177,7 @@ def parse(tokens):
     return types
 
 
+# A customized Instruction contains the name, connectors (like arguments of a function), and the statements
 class Instruction:
     def __init__(self, name, connectors, stmts):
         self.name = name
@@ -180,6 +187,7 @@ class Instruction:
     def __repr__(self):
         return f'{self.name}'
 
+# Executes the function
 class Interpreter:
     def __init_func__(self):
         self.in_function = False
@@ -269,7 +277,7 @@ class Interpreter:
 
 def main():
     current_line = 0
-    interp = Interpreter()
+    interp = Interpreter()          # Instance the interpreter (not compiler)
 
     for stmt in read_file(file_name=argv[-1]):
         current_line += 1
